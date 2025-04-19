@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-galaxy text-white font-orbit;
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Animation states */
+.animate-hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animate-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animation variations */
+.animate-fade-up {
+  transform: translateY(40px);
+}
+
+.animate-fade-down {
+  transform: translateY(-40px);
+}
+
+.animate-fade-left {
+  transform: translateX(40px);
+}
+
+.animate-fade-right {
+  transform: translateX(-40px);
+}
+
+.animate-zoom-in {
+  transform: scale(0.9);
+}
+
+.animate-zoom-out {
+  transform: scale(1.1);
+}
+
+.animate-flip {
+  transform: rotateY(90deg);
+  transition: opacity 0.8s ease, transform 0.8s ease-out;
+}
+
+/* Custom glow effects */
+.text-glow {
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.7),
+               0 0 20px rgba(0, 255, 255, 0.5),
+               0 0 30px rgba(0, 255, 255, 0.3);
+}
+
+.box-glow {
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3),
+              0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
