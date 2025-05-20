@@ -2,24 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Base styles */
 body {
-  @apply bg-galaxy text-white font-orbit;
+  @apply bg-[#05051a] text-white font-orbit;
 }
 
-@keyframes twinkle {
-  0%, 100% {
-    opacity: 0.3;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-/* Animation states */
+/* Simple animation states - reduced for better performance */
 .animate-hidden {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .animate-visible {
@@ -27,58 +19,662 @@ body {
   transform: translateY(0);
 }
 
-/* Animation variations */
+/* Simplified animation variations */
 .animate-fade-up {
-  transform: translateY(40px);
+  transform: translateY(20px);
 }
 
 .animate-fade-down {
-  transform: translateY(-40px);
+  transform: translateY(-20px);
 }
 
 .animate-fade-left {
-  transform: translateX(40px);
+  transform: translateX(20px);
 }
 
 .animate-fade-right {
-  transform: translateX(-40px);
+  transform: translateX(-20px);
 }
 
-.animate-zoom-in {
-  transform: scale(0.9);
+/* Project card styling */
+.project-card {
+  transition: transform 0.3s ease;
 }
 
-.animate-zoom-out {
-  transform: scale(1.1);
+.project-card:hover {
+  transform: translateY(-5px);
 }
 
-.animate-flip {
-  transform: rotateY(90deg);
-  transition: opacity 0.8s ease, transform 0.8s ease-out;
+/* Modern scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
 }
 
-/* Custom glow effects */
-.text-glow {
-  text-shadow: 0 0 10px rgba(0, 255, 255, 0.7),
-               0 0 20px rgba(0, 255, 255, 0.5),
-               0 0 30px rgba(0, 255, 255, 0.3);
+::-webkit-scrollbar-track {
+  background: rgba(15, 15, 28, 0.6);
 }
 
-.box-glow {
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3),
-              0 0 20px rgba(0, 255, 255, 0.2);
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
 }
 
-/* Floating animation */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Grid layout helpers */
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.aspect-1 {
+  aspect-ratio: 1/1;
+}
+
+.aspect-4-3 {
+  aspect-ratio: 4/3;
+}
+
+/* Navigation styles */
+.nav-link {
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+/* Navbar animations */
+@keyframes gradient-pulse {
+  0% {
+    opacity: 0;
   }
   50% {
-    transform: translateY(-10px);
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
   }
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-gradient-pulse {
+  animation: gradient-pulse 3s ease-in-out infinite;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Skill scroller animations and styling */
+.skill-scroller-container {
+  position: relative;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.skill-scroller {
+  animation: scrollSkills 25s linear infinite;
+  width: max-content;
+}
+
+@keyframes scrollSkills {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* For when the elements are hovered */
+.skill-scroller:hover {
+  animation-play-state: paused;
+}
+
+/* 3D styling for skill cubes */
+.skill-item {
+  perspective: 500px;
+}
+
+.skill-item:hover > div:first-of-type {
+  transform: translateZ(10px) rotateX(10deg) rotateY(10deg);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Advanced 3D effects for immersive portfolio */
+
+/* Animated gradient text */
+.animate-gradient-text {
+  background-size: 200% 200%;
+  animation: gradientTextAnimation 4s ease infinite;
+}
+
+@keyframes gradientTextAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Floating animation for elements */
+.floating {
+  animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Hero animations (replaces GSAP) */
+.hero-letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(100%);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-subtitle {
+  animation: subtitleFadeIn 1s ease forwards;
+}
+
+@keyframes subtitleFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-scroll-indicator {
+  animation: scrollIndicatorFadeIn 1s ease forwards, scrollIndicatorPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes scrollIndicatorFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scrollIndicatorPulse {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+  100% { transform: translateY(0); }
+}
+
+/* About section animations (replaces GSAP) */
+.animate-about-title {
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.animate-about-text {
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.animate-stat-item {
+  animation: scaleIn 0.6s ease forwards;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-image-reveal {
+  animation: imageReveal 1.2s ease-out forwards;
+}
+
+.image-hidden {
+  clip-path: inset(100% 0 0 0);
+}
+
+@keyframes imageReveal {
+  from {
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    clip-path: inset(0% 0 0 0);
+  }
+}
+
+/* Project section animations */
+.animate-heading {
+  animation: fadeInUp 1.2s ease forwards;
+}
+
+.animate-project-card {
+  animation: fadeInUp 1s ease forwards;
+}
+
+/* Contact section animations */
+.animate-contact-heading {
+  animation: fadeInUp 1s ease forwards;
+}
+
+.animate-contact-form {
+  animation: fadeInUp 1.2s ease forwards;
+}
+
+.animate-form-element {
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+/* Navbar menu animations */
+.animate-menu-item-in {
+  animation: menuItemIn 0.5s ease forwards;
+}
+
+.animate-menu-item-out {
+  animation: menuItemOut 0.3s ease forwards;
+}
+
+@keyframes menuItemIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes menuItemOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-20px); }
+}
+
+/* Background animations for ThreeScene */
 .animate-float {
-  animation: float 4s ease-in-out infinite;
+  animation: float 15s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(10px, 10px); }
+  50% { transform: translate(-5px, 15px); }
+  75% { transform: translate(-10px, -5px); }
+  100% { transform: translate(0, 0); }
+}
+
+.animate-glow-pulse {
+  animation: glowPulse 8s ease-in-out infinite;
+}
+
+.animate-glow-pulse-delayed {
+  animation: glowPulse 8s ease-in-out 4s infinite;
+}
+
+@keyframes glowPulse {
+  0% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.2); }
+  100% { opacity: 0.3; transform: scale(1); }
+}
+
+/* Star twinkling animation */
+.animate-twinkle {
+  animation: twinkle 5s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.2; }
+  50% { opacity: 0.8; }
+  100% { opacity: 0.2; }
+}
+
+/* Solar System and Planet Styles */
+/* Horizontal scrolling planets */
+.planets-container {
+  position: relative;
+  perspective: 1000px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.planets-scroll-container {
+  width: 100%;
+  overflow: hidden;
+  padding: 40px 0;
+}
+
+.planets-scroll {
+  display: flex;
+  gap: 40px;
+  animation: scrollPlanets 60s linear infinite;
+  padding: 10px 20px;
+  width: max-content;
+}
+
+@keyframes scrollPlanets {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); } /* Move half the width to create a seamless loop */
+}
+
+/* Planet container with label */
+.planet-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 15px;
+  position: relative;
+  perspective: 1000px;
+  transition: transform 0.3s ease;
+}
+
+.planet-container:hover {
+  transform: translateY(-15px);
+}
+
+/* Skill name label below planet */
+.planet-name-label {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+.planet-container:hover .planet-name-label {
+  color: white;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+/* Individual planet styles */
+.planet {
+  position: relative;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: inset 5px -5px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transform-style: preserve-3d;
+  overflow: visible;
+}
+
+.planet:hover {
+  transform: scale(1.15) rotate(5deg);
+  box-shadow: inset 5px -5px 20px rgba(0, 0, 0, 0.5), 0 0 35px rgba(255, 255, 255, 0.4);
+  z-index: 20;
+}
+
+.planet.selected {
+  transform: scale(1.2);
+  box-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
+  z-index: 30;
+}
+
+.planet-abbr {
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  font-size: 1rem;
+  pointer-events: none;
+}
+
+/* Tooltip shown on hover */
+.planet-name {
+  position: absolute;
+  top: -35px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s;
+  pointer-events: none;
+}
+
+.planet:hover .planet-name {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Individual planet styles */
+.planet-sun {
+  background: radial-gradient(circle at 30% 30%, #ffeb3b, #ff9800);
+  box-shadow: 0 0 50px rgba(255, 235, 59, 0.8);
+  z-index: 5;
+}
+
+.sun-glow {
+  position: absolute;
+  width: 140%;
+  height: 140%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 235, 59, 0.4) 0%, transparent 70%);
+  animation: pulsate 4s ease-in-out infinite;
+  z-index: -1;
+}
+
+@keyframes pulsate {
+  0% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.1); }
+  100% { opacity: 0.7; transform: scale(1); }
+}
+
+.planet-earth {
+  background: radial-gradient(circle at 30% 30%, #1e88e5, #0d47a1);
+}
+
+.planet-mars {
+  background: radial-gradient(circle at 30% 30%, #e53935, #b71c1c);
+}
+
+.planet-venus {
+  background: radial-gradient(circle at 30% 30%, #ff9800, #e65100);
+}
+
+.planet-mercury {
+  background: radial-gradient(circle at 30% 30%, #9e9e9e, #424242);
+}
+
+.planet-jupiter {
+  background: radial-gradient(circle at 30% 30%, #ffb74d, #e65100);
+  box-shadow: 0 0 15px rgba(255, 183, 77, 0.5);
+}
+
+.planet-saturn {
+  background: radial-gradient(circle at 30% 30%, #ffca28, #f57f17);
+  position: relative;
+}
+
+.planet-rings {
+  position: absolute;
+  width: 180%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.3);
+  left: -40%;
+  top: 50%;
+  transform: translateY(-50%) rotateX(75deg);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  z-index: -1;
+}
+
+.planet-uranus {
+  background: radial-gradient(circle at 30% 30%, #4db6ac, #00796b);
+}
+
+.planet-neptune {
+  background: radial-gradient(circle at 30% 30%, #29b6f6, #0277bd);
+}
+
+.planet-pluto {
+  background: radial-gradient(circle at 30% 30%, #b0bec5, #546e7a);
+}
+
+.planet-moon {
+  background: radial-gradient(circle at 30% 30%, #e0e0e0, #9e9e9e);
+}
+
+.planet-europa {
+  background: radial-gradient(circle at 30% 30%, #e1f5fe, #29b6f6);
+}
+
+.planet-io {
+  background: radial-gradient(circle at 30% 30%, #fff176, #fbc02d);
+}
+
+.planet-ganymede {
+  background: radial-gradient(circle at 30% 30%, #cfd8dc, #78909c);
+}
+
+.planet-titan {
+  background: radial-gradient(circle at 30% 30%, #ffe0b2, #ffb74d);
+}
+
+.planet-callisto {
+  background: radial-gradient(circle at 30% 30%, #b2dfdb, #4db6ac);
+}
+
+/* Mini planet for the detail panel */
+.mini-planet {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 3px -3px 10px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+/* Skill detail panel */
+.skill-detail-panel {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Glitch effect for text - inspired by Richard Mattka's site */
+.glitch {
+  position: relative;
+  animation: glitch 2s steps(2, end) infinite;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+.glitch::before {
+  left: 2px;
+  text-shadow: -2px 0 #ff00e1;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  left: -2px;
+  text-shadow: -2px 0 #00fff9, 2px 2px #ff00e1;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim2 5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes glitch-anim {
+  0% { clip: rect(70px, 9999px, 12px, 0); }
+  10% { clip: rect(29px, 9999px, 49px, 0); }
+  20% { clip: rect(45px, 9999px, 56px, 0); }
+  30% { clip: rect(14px, 9999px, 76px, 0); }
+  40% { clip: rect(56px, 9999px, 98px, 0); }
+  50% { clip: rect(79px, 9999px, 23px, 0); }
+  60% { clip: rect(36px, 9999px, 32px, 0); }
+  70% { clip: rect(24px, 9999px, 63px, 0); }
+  80% { clip: rect(15px, 9999px, 58px, 0); }
+  90% { clip: rect(53px, 9999px, 27px, 0); }
+  100% { clip: rect(21px, 9999px, 41px, 0); }
+}
+
+@keyframes glitch-anim2 {
+  0% { clip: rect(67px, 9999px, 41px, 0); }
+  10% { clip: rect(36px, 9999px, 26px, 0); }
+  20% { clip: rect(58px, 9999px, 87px, 0); }
+  30% { clip: rect(32px, 9999px, 15px, 0); }
+  40% { clip: rect(45px, 9999px, 92px, 0); }
+  50% { clip: rect(31px, 9999px, 56px, 0); }
+  60% { clip: rect(83px, 9999px, 62px, 0); }
+  70% { clip: rect(52px, 9999px, 33px, 0); }
+  80% { clip: rect(12px, 9999px, 60px, 0); }
+  90% { clip: rect(63px, 9999px, 40px, 0); }
+  100% { clip: rect(14px, 9999px, 19px, 0); }
+}
+
+/* Parallax effect for sections */
+.parallax {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.parallax-layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.parallax-layer-0 { transform: translateZ(0); }
+.parallax-layer-1 { transform: translateZ(-50px); }
+.parallax-layer-2 { transform: translateZ(-100px); }
+.parallax-layer-3 { transform: translateZ(-150px); }
+
+/* Smoother scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Glow effects for elements */
+.glow-text {
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.glow-border {
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 10px rgba(255, 255, 255, 0.3);
 }

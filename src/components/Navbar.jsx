@@ -6,11 +6,11 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
   const navLinks = [
-    { href: '#hero', label: 'Home' },
-    { href: '#about', label: 'About' },
+    { href: '#hero', label: 'Intro' },
+    { href: '#about', label: 'Profile' },
     { href: '#skills', label: 'Skills' },
-    { href: '#projects', label: 'Projects' },
-    { href: '#contact', label: 'Contact' }
+    { href: '#projects', label: 'Work' },
+    { href: '#contact', label: 'Chat' }
   ];
   
   // Handle scroll event to change navbar style when scrolled
@@ -42,48 +42,49 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`w-full p-4 fixed top-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-black/80 backdrop-blur-md shadow-md' : 'bg-transparent'
+    <nav className={`w-full px-4 py-3 md:py-4 fixed top-0 z-50 transition-all duration-500 ${
+      isScrolled 
+        ? 'bg-gradient-to-r from-[#05051a]/95 via-[#080830]/95 to-[#05051a]/95 backdrop-blur-md shadow-lg' 
+        : 'bg-transparent'
+    } before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-indigo-900/10 before:to-transparent before:opacity-0 ${
+      isScrolled ? 'before:animate-gradient-pulse' : ''
     }`}>
-      <div className="max-w-6xl mx-auto flex justify-between items-center">
-        {/* Logo */}
+      <div className="w-full max-w-5xl mx-auto flex justify-between items-center relative z-10">
+        {/* Logo - Refined lettermark */}
         <a 
           href="#hero" 
-          className="text-2xl font-bold text-glow text-neon font-orbit"
+          className="font-bold text-xl md:text-2xl group transition-all duration-300"
         >
-          Kamran<span className="text-white">Dev</span>
+          <span className="border border-white hover:border-indigo-400 px-1.5 py-0.5 transition-all duration-300 group-hover:text-indigo-400">K</span>
         </a>
         
-        {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-8">
+        {/* Desktop Menu - Clean and refined - Centered */}
+        <div className="hidden md:flex items-center justify-center space-x-4 lg:space-x-6 absolute left-1/2 transform -translate-x-1/2">
           {navLinks.map((link, index) => (
             <a
               key={index}
               href={link.href}
-              className={`relative px-2 py-1 text-sm font-medium transition-colors ${
+              className={`nav-link text-xs md:text-sm uppercase tracking-wider transition-all duration-300 relative py-2 ${
                 activeSection === link.href.slice(1) 
-                  ? 'text-neon'
-                  : 'text-gray-300 hover:text-neon'
+                  ? 'active text-white font-medium'
+                  : 'text-gray-400 hover:text-white'
+              } after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-indigo-400 ${
+                activeSection === link.href.slice(1)
+                  ? 'after:w-full'
+                  : 'after:w-0 hover:after:w-full after:transition-all after:duration-300'
               }`}
             >
               {link.label}
-              {activeSection === link.href.slice(1) && (
-                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-neon"></span>
-              )}
             </a>
           ))}
-          
-          <a 
-            href="#contact" 
-            className="bg-neon text-galaxy px-4 py-1 rounded-full text-sm font-medium hover:bg-neon/90 transition-colors"
-          >
-            Hire Me
-          </a>
         </div>
         
-        {/* Mobile Menu Button */}
+        {/* Right spacer to balance the centered menu */}
+        <div className="hidden md:block w-[42px]"></div>
+        
+        {/* Mobile Menu Button - Simplified */}
         <button
-          className="md:hidden text-neon"
+          className="md:hidden text-white"
           onClick={toggleMenu}
           aria-label="Toggle menu"
         >
@@ -103,31 +104,24 @@ const Navbar = () => {
         </button>
       </div>
       
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Enhanced */}
       {isMenuOpen && (
-        <div className="md:hidden mt-4 p-4 bg-black/90 backdrop-blur-md rounded-xl border border-neon/20">
-          <div className="flex flex-col space-y-4">
+        <div className="md:hidden mt-2 p-4 bg-gradient-to-b from-[#080830]/95 to-[#05051a]/95 backdrop-blur-lg absolute left-0 right-0 shadow-xl animate-fadeIn">
+          <div className="flex flex-col space-y-4 max-w-full">
             {navLinks.map((link, index) => (
               <a
                 key={index}
                 href={link.href}
                 onClick={() => setIsMenuOpen(false)}
-                className={`block py-2 text-center transition-colors ${
+                className={`py-2 text-sm uppercase tracking-wider transition-all duration-300 ${
                   activeSection === link.href.slice(1)
-                    ? 'text-neon'
-                    : 'text-gray-300'
+                    ? 'text-white font-medium border-l-2 border-indigo-400 pl-2'
+                    : 'text-gray-400 hover:text-gray-200 hover:pl-1'
                 }`}
               >
                 {link.label}
               </a>
             ))}
-            <a 
-              href="#contact" 
-              onClick={() => setIsMenuOpen(false)}
-              className="bg-neon text-galaxy py-2 rounded-lg text-center font-medium"
-            >
-              Hire Me
-            </a>
           </div>
         </div>
       )}
